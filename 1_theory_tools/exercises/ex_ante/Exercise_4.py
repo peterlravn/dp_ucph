@@ -25,6 +25,8 @@ def solve_consumption_uncertainty(par):
         
             if t<par.T-1:
                 
+                for i in par.K:
+                    distribution = par.pi
                 #Fill in
                 # Hint: Loop through shocks
                 #       Interpolate value function for each shock
