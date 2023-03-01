@@ -27,11 +27,12 @@ def solve_consumption_deaton(par):
         
             if t<par.T-1:
                 for s in range(par.num_shocks):
-                    # fill in
                     
-                    
-                    
-                    
+                    Y = par.eps[s]
+                    weight = par.eps_w[s]
+                    w_next = par.R*w_c + Y
+                                   
+                    EV_next = EV_next + weight*np.interp(w_next, sol.grid_W[:,t+1], sol.V[:,t+1])
                     
                     
             V_guess = util(c,par)+par.beta*EV_next

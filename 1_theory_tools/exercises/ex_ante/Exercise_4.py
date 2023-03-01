@@ -25,8 +25,12 @@ def solve_consumption_uncertainty(par):
         
             if t<par.T-1:
                 
-                for i in par.K:
-                    distribution = par.pi
+                for i in range(par.K):
+                    weight = par.pi[i]
+                    shocks = par.eps[i]
+                    
+                    EV_next = EV_next + weight*np.interp(w_c + shocks, sol.grid_W[:,t+1], sol.V[:,t+1])
+                    
                 #Fill in
                 # Hint: Loop through shocks
                 #       Interpolate value function for each shock
