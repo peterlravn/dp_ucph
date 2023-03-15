@@ -55,16 +55,22 @@ def solve_deaton_infty(par):
         interp = interpolate.interp1d(par.grid_W,V0, bounds_error=False, fill_value = "extrapolate")
 
         for iw,w in enumerate(par.grid_W):
-            #fill in
-            #Hint: Similar to Exercise_6
+            c = grid_C*w
+            w_c = w - c
+            EV_next = 0
             
-            
-            
-            
-            
-            
-            
-            
+            if sol.it < par.max_iter:
+                for s in range(par.num_shocks):
+                    Y = par.eps[s]
+                    weight = par.eps_w[s]
+                    w_next = par.R*w_c + Y
+
+                    EV_next = EV_next + weight*interp(w_next)
+
+            V_guess = util(c,par) + par.beta * EV_next
+            index = np.argmax(V_guess)
+            sol.C[iw] = c[index]
+            sol.V[iw] = np.amax(V_guess)
         
         sol.it += 1
         sol.delta = max(abs(sol.V - V0)) 
