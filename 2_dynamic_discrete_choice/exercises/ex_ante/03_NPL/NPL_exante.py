@@ -68,7 +68,7 @@ def ll(theta, model, data, pk0,out=1):
 
     # Update CCPs
     #Fill in
-    #pk =
+    #pk = 
     
     #Map choice probabilities to data
     pKdata = pk[data.x] 
