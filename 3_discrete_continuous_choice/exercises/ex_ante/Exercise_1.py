@@ -32,7 +32,7 @@ def setup():
     par.M_ini = 1.5
     
     # Grid
-    par.num_M = 100
+    par.num_M = 1000
     par.grid_M = nonlinspace(1.0e-6,par.M,par.num_M,1.1) # same as np.linspace just with unequal spacing
     
     # Dimension of value function space
@@ -74,7 +74,7 @@ def solve_ti(par):
 def euler_error_func(c,t,par,sol):
     
     #Find next period's assets
-    m_next = #Fill in. Hint: create a matrix with state grid points as rows and add the different shocks as columns
+    m_next = par.R*(par.grid_M-c)[:,np.newaxis]+par.eps[np.newaxis,:]
 
     #Interpolate next period's consumption
     interp = interpolate.interp1d(par.grid_M,sol.C[:,t+1], bounds_error=False, fill_value = "extrapolate") 
@@ -87,7 +87,7 @@ def euler_error_func(c,t,par,sol):
     U_now = marg_util(c,par) 
 
     # Calculate Euler error
-    euler_error = # fill in the Euler error
+    euler_error = U_now-par.beta*par.R*EU_next
 
     return euler_error
 
